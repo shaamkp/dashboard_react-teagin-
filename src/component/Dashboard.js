@@ -141,8 +141,6 @@ export default function Dashboard({ active}) {
           <TestDiv></TestDiv>
         </MainContainer>
       </Body>
-
-      <h1>dashboard</h1>
     </div>
   );
 }

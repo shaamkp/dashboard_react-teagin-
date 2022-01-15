@@ -1,58 +1,94 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState } from "react";
+import styled from "styled-components";
 import eclips from "../assets/images/Ellipse 1.svg";
 import eclips2 from "../assets/images/Ellipse 2.svg";
-import bgImage from "../assets/images/Bg.jpg"
-import message from "../assets/images/Vector.svg"
-import lock from "../assets/images/lock.svg"
-
+import bgImage from "../assets/images/Bg.jpg";
+import message from "../assets/images/Vector.svg";
+import lock from "../assets/images/lock.svg";
+import axios from "axios";
+import { BASE_URL } from "../axiosConfig";
+// import { useHistory } from "react-router-dom";
 
 export default function Login() {
-    return (
-      <Container>
-        <Left>
-          <EclipsContainer>
-            <EclipOne src={eclips} alt="Image" />
-          </EclipsContainer>
-          <EclipsContainer2>
-            <EclipTwo src={eclips2} alt="Image" />
-          </EclipsContainer2>
-          <Content>
-            <ContentTitle>GoFinance</ContentTitle>
-            <ContentPara>
-              The most popular peer to peer lending at SEA
-            </ContentPara>
-            <ContentButton>Read More</ContentButton>
-          </Content>
-        </Left>
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
-        <Right>
-          <RightContent>
-            <RightTitle>SaaS Kit</RightTitle>
-            <RightSubTitle>Hello!</RightSubTitle>
-            <RightPara>Sign Up to Get Started</RightPara>
-            <RightForm>
-              <Username type="text" placeholder="Email Address" />
-              <Password type="password" placeholder="Password" />
-              <LoginButton type="submit">Login</LoginButton>
-            </RightForm>
-          </RightContent>
-        </Right>
-      </Container>
-    );
+
+  
+
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    axios.post(`${BASE_URL}`, { username, password })
+    .then((response)=>{
+      console.log(response.data);
+      let data = response.data;
+      localStorage.setItem("user_data",JSON.stringify(data));
+      
+    })
+    .catch((error) =>{
+      console.log(error.response.data);
+      if(error.response.status == 401){
+        setMessage(error.response.data.data.detail);
+      }
+    })
+  }
+
+  return (
+    <Container>
+      <Left>
+        <EclipsContainer>
+          <EclipOne src={eclips} alt="Image" />
+        </EclipsContainer>
+        <EclipsContainer2>
+          <EclipTwo src={eclips2} alt="Image" />
+        </EclipsContainer2>
+        <Content>
+          <ContentTitle>GoFinance</ContentTitle>
+          <ContentPara>
+            The most popular peer to peer lending at SEA
+          </ContentPara>
+          <ContentButton>Read More</ContentButton>
+        </Content>
+      </Left>
+
+      <Right onSubmit={handleSubmit}>
+        <RightContent>
+          <RightTitle>SaaS Kit</RightTitle>
+          <RightSubTitle>Hello!</RightSubTitle>
+          <RightPara>Sign Up to Get Started</RightPara>
+          <RightForm>
+            <Username
+              type="text"
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
+              placeholder="Email Address"
+            />
+            <Password
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              placeholder="Password"
+            />
+            {message && <ErrorMessage>{message}</ErrorMessage>}
+            <LoginButton type="submit">Login</LoginButton>
+          </RightForm>
+        </RightContent>
+      </Right>
+    </Container>
+  );
 }
 
 const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
-  
 `;
 const Left = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 60% ;
+  width: 60%;
   background: url(${bgImage});
   position: relative;
 `;
@@ -60,9 +96,9 @@ const Content = styled.div`
   padding-bottom: 67px;
 `;
 const ContentTitle = styled.h2`
-    font-size: 32px;
-    font-weight: 700;
-    color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
 `;
 const ContentPara = styled.p`
   font-family: Poppins;
@@ -96,7 +132,6 @@ const RightTitle = styled.h3`
   font-size: 43px;
   font-weight: 400;
   color: #109cf1;
-  
 `;
 const RightSubTitle = styled.h5`
   line-height: 39px;
@@ -141,14 +176,21 @@ const LoginButton = styled.button`
   color: #fff;
 `;
 const EclipsContainer = styled.div`
-    position: absolute;
-    bottom: 0;
-    left: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 `;
-const EclipOne = styled.img`
-  
+const EclipOne = styled.img``;
+const EclipsContainer2 = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
 `;
-const EclipsContainer2 = styled.div``;
 const EclipTwo = styled.img``;
-
-
+const ErrorMessage = styled.p`
+  font-size: 12px;
+  font-weight: 600;
+  color: red;
+  margin-bottom: 25px;
+  text-align: center;
+`;

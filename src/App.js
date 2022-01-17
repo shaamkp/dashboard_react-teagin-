@@ -5,15 +5,16 @@ import Dashboard from "./component/Dashboard";
 import Sidebar from "./component/include/Sidebar";
 import Contact from "./component/Contact";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import MainRouter from "./component/Routers/MainRouter";
+import MainRouter from "./component/routing/routers/MainRouter";
+import Store from "./component/contexts/store";
 
 function App() {
   return (
-    <>
+    <Store>
       <Router>
         <MainRouter />
       </Router>
-    </>
+    </Store>
   );
 }
 

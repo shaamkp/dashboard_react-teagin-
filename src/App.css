@@ -3,8 +3,18 @@
   margin: 0;
   padding: 0;
 }
+
+ul.ol{
+  list-style: none;
+}
+
+li{
+  list-style: none;
+}
+
 body {
   font-family: "Poppins", sans-serif;
+  background: #f5f6f8;
 }
 
 .window {
@@ -13,6 +23,7 @@ body {
   background: rgb(246, 248, 250);
   color: black;
   padding:70px 20px 0 280px;
+  transition: all 0.4s ease;
 }
 .small {
   background: #f5f6f8;
@@ -20,4 +31,5 @@ body {
   background: rgb(246, 248, 250);
   color: black;
   padding:70px 20px 0 100px;
+  transition: all 0.4s ease;
 }

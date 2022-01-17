@@ -1,119 +1,134 @@
-import React, { useState } from 'react';
-import styled from 'styled-components'
-import Dashboard from '../../assets/images/qr.svg'
-import Tasks from '../../assets/images/tasks.svg'
-import Email from '../../assets/images/email.svg'
-import Contacts from '../../assets/images/user.svg'
-import Deals from '../../assets/images/deals.svg'
-import SettingsImg from '../../assets/images/settings.svg'
-import Toggle from '../../assets/images/toggle.svg'
-import Profileimg from '../../assets/images/image.jpg'
-import Notification from '../../assets/images/notifications.svg'
-import Search from '../../assets/images/search.svg'
-import { Link, Outlet, NavLink, Routes, Route } from "react-router-dom";
+import React, { useState } from "react";
+import styled from "styled-components";
+import Dashboard from "../../assets/images/qr.svg";
+import Tasks from "../../assets/images/tasks.svg";
+import Email from "../../assets/images/email.svg";
+import Contacts from "../../assets/images/user.svg";
+import Deals from "../../assets/images/deals.svg";
+import SettingsImg from "../../assets/images/settings.svg";
+import Toggle from "../../assets/images/toggle.svg";
+import Profileimg from "../../assets/images/image.jpg";
+import Notification from "../../assets/images/notifications.svg";
+import Search from "../../assets/images/search.svg";
+import {
+  Link,
+  Outlet,
+  NavLink,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 
+export default function Sidebar({ active, setActive }) {
+  const [userdata, setUserdata] = useState({});
+  const navigate = useNavigate();
 
-export default function Sidebar({active, setActive}) {
-    // const active = {setActive};
-//   const[active,setActive]=useState(false);
-console.log("IN SIDEBAR");
-    return (
-      <>
-        <Container>
-          <Aside className={active ? "active" : ""}>
-            <TopSection>
-              <TopTitle>
-                SaaS{" "}
-                <SubTopTitle className={active ? "remove" : ""}>
-                  Kit
-                </SubTopTitle>
-              </TopTitle>
-            </TopSection>
-            <User>
-              <UserImageContainer>
-                <UserImage src={Profileimg} alt="ProfileImage" />
-              </UserImageContainer>
-              <UserDetails className={active ? "remove" : ""}>
-                <UserName>Sierra Ferguson</UserName>
-                <UserEmail>s.ferguson@gmail.com</UserEmail>
-              </UserDetails>
-            </User>
-            <Nav>
-              <Ul>
-                <List to="/dashboard">
-                  <ImageContainer className={active ? "imagewidth" : ""}>
-                    <Image src={Dashboard} alt="Image" />
-                  </ImageContainer>
-                  <ItemName className={active ? "remove" : ""}>
-                    Dashboard
-                  </ItemName>
-                </List>
-                <List to="/dashboard">
-                  <ImageContainer className={active ? "imagewidth" : ""} >
-                    <Image src={Tasks} alt="Image" />
-                  </ImageContainer>
-                  <ItemName className={active ? "remove" : ""}>Tasks</ItemName>
-                </List>
-                <List to="/dashboard">
-                  <ImageContainer className={active ? "imagewidth" : ""}>
-                    <Image src={Email} alt="Image" />
-                  </ImageContainer>
-                  <ItemName className={active ? "remove" : ""}>Email</ItemName>
-                </List>
-                <List to="/contact">
-                  <ImageContainer className={active ? "imagewidth" : ""}>
-                    <Image src={Contacts} alt="Image" />
-                  </ImageContainer>
-                  <ItemName className={active ? "remove" : ""}>
-                    Contacts
-                  </ItemName>
-                </List>
-                <List to="/dashboard">
-                  <ImageContainer className={active ? "imagewidth" : ""}>
-                    <Image src={Deals} alt="Image" />
-                  </ImageContainer>
-                  <ItemName className={active ? "remove" : ""}>Deals</ItemName>
-                </List>
-              </Ul>
-            </Nav>
-            <BottomNav>
-              <Settings>
-                <SettingsImageContainer>
-                  <SettingsImage src={SettingsImg} alt="Image" />
-                </SettingsImageContainer>
-                <SettingsText className={active ? "remove" : ""}>
-                  Settings
-                </SettingsText>
-              </Settings>
-              <ToggleConatiner onClick={() => setActive(!active)}>
-                <ToggleImageContainer>
-                  <ToggleImage src={Toggle} alt="Image" />
-                </ToggleImageContainer>
-                <ToggleText className={active ? "remove" : ""}>
-                  Toggle sidebar
-                </ToggleText>
-              </ToggleConatiner>
-            </BottomNav>
-          </Aside>
-          <Header active={active}>
-            <HeaderForm>
-              <HeaderInput type="text" placeholder="Global search" />
-            </HeaderForm>
-            <NotificationContainer>
-              <NotificationImage src={Notification} alt="" />
-            </NotificationContainer>
-          </Header>
-        </Container>
-        <Outlet />
-        {/* <Routes>
+  const handleLogout = () => {
+    localStorage.clear();
+    setTimeout(() => {
+      navigate("/auth/login");
+    }, 1500);
+  };
+
+  console.log("IN SIDEBAR");
+  return (
+    <>
+      <Container>
+        <Aside className={active ? "active" : ""}>
+          <TopSection>
+            <TopTitle>
+              SaaS{" "}
+              <SubTopTitle className={active ? "remove" : ""}>Kit</SubTopTitle>
+            </TopTitle>
+          </TopSection>
+          <User>
+            <UserImageContainer>
+              <UserImage src={Profileimg} alt="ProfileImage" />
+            </UserImageContainer>
+            <UserDetails className={active ? "remove" : ""}>
+              <UserName>Sierra Ferguson</UserName>
+              <UserEmail>s.ferguson@gmail.com</UserEmail>
+            </UserDetails>
+          </User>
+          <Nav>
+            <Ul>
+              <List to="/dashboard">
+                <ImageContainer className={active ? "imagewidth" : ""}>
+                  <Image src={Dashboard} alt="Image" />
+                </ImageContainer>
+                <ItemName className={active ? "remove" : ""}>
+                  Dashboard
+                </ItemName>
+              </List>
+              <List to="/dashboard">
+                <ImageContainer className={active ? "imagewidth" : ""}>
+                  <Image src={Tasks} alt="Image" />
+                </ImageContainer>
+                <ItemName className={active ? "remove" : ""}>Tasks</ItemName>
+              </List>
+              <List to="/dashboard">
+                <ImageContainer className={active ? "imagewidth" : ""}>
+                  <Image src={Email} alt="Image" />
+                </ImageContainer>
+                <ItemName className={active ? "remove" : ""}>Email</ItemName>
+              </List>
+              <List to="/contact">
+                <ImageContainer className={active ? "imagewidth" : ""}>
+                  <Image src={Contacts} alt="Image" />
+                </ImageContainer>
+                <ItemName className={active ? "remove" : ""}>Contacts</ItemName>
+              </List>
+              <List to="/dashboard">
+                <ImageContainer className={active ? "imagewidth" : ""}>
+                  <Image src={Deals} alt="Image" />
+                </ImageContainer>
+                <ItemName className={active ? "remove" : ""}>Deals</ItemName>
+              </List>
+            </Ul>
+          </Nav>
+          <BottomNav>
+            <Settings>
+              <SettingsImageContainer>
+                <SettingsImage src={SettingsImg} alt="Image" />
+              </SettingsImageContainer>
+              <SettingsText className={active ? "remove" : ""}>
+                Settings
+              </SettingsText>
+            </Settings>
+            <ToggleConatiner onClick={() => setActive(!active)}>
+              <ToggleImageContainer>
+                <ToggleImage src={Toggle} alt="Image" />
+              </ToggleImageContainer>
+              <ToggleText className={active ? "remove" : ""}>
+                Toggle sidebar
+              </ToggleText>
+            </ToggleConatiner>
+          </BottomNav>
+        </Aside>
+        <Header active={active}>
+          <HeaderForm>
+            <HeaderInput type="text" placeholder="Global search" />
+          </HeaderForm>
+          <NotificationContainer>
+            {userdata ? (
+              <LoginButton onClick={() => handleLogout()}>Logout</LoginButton>
+            ) : (
+              <LoginButton to="/auth/login">Login</LoginButton>
+            )}
+            <NotificationImage src={Notification} alt="" />
+          </NotificationContainer>
+        </Header>
+      </Container>
+      <Outlet />
+      {/* <Routes>
           <Route path="/dashboard" element={<Dashboard />}/>
         </Routes> */}
-      </>
-    );
+    </>
+  );
 }
 
 const Container = styled.div`
-    display: flex;
+  display: flex;
 `;
 const Aside = styled.aside`
   width: 256px;
@@ -150,7 +165,6 @@ const SubTopTitle = styled.span`
   &.remove {
     display: none;
     transform: translateX(30px);
-    
   }
 `;
 const User = styled.div`
@@ -158,18 +172,16 @@ const User = styled.div`
   display: flex;
   align-items: center;
 `;
-const UserImageContainer = styled.div`
-
-`;
+const UserImageContainer = styled.div``;
 const UserImage = styled.img`
-    width: 100%;
-    display: block;
-    border-radius: 50%;
+  width: 100%;
+  display: block;
+  border-radius: 50%;
 `;
 const UserDetails = styled.div`
   /* margin-left: 12px; */
   position: absolute;
-  left:70px;
+  left: 70px;
   /* transition: width 0.4s ease; */
   &.remove {
     display: none;
@@ -189,33 +201,29 @@ const Nav = styled.div`
   padding: 16px 24px;
   border-bottom: 1px solid #ebeff2;
 `;
-const Ul = styled.div`
-  
-`;
+const Ul = styled.div``;
 const List = styled(NavLink)`
   display: flex;
   align-items: center;
   margin-top: 20px;
   cursor: pointer;
   text-decoration: none;
-  
 `;
 const ImageContainer = styled.div`
-    width: 20px;
-    height: 20px;
-    &.imagewidth{
-      
-    }
+  width: 20px;
+  height: 20px;
+  &.imagewidth {
+  }
 `;
 const Image = styled.img`
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 `;
 const ItemName = styled.div`
   margin-left: 15px;
   font-size: 13px;
   font-weight: 600;
- transition: width 0.4s ease;
+  transition: width 0.4s ease;
   &.remove {
     display: none;
     transition: width 0.4s ease;
@@ -233,20 +241,15 @@ const Settings = styled.div`
   align-items: center;
   cursor: pointer;
 `;
-const SettingsImageContainer = styled.div`
-
-`;
-const SettingsImage = styled.img`
-
-`;
+const SettingsImageContainer = styled.div``;
+const SettingsImage = styled.img``;
 const SettingsText = styled.div`
   margin-left: 15px;
   font-size: 13px;
   font-weight: 600;
-  &.remove{
+  &.remove {
     display: none;
   }
-
 `;
 const ToggleConatiner = styled.div`
   display: flex;
@@ -260,7 +263,7 @@ const ToggleText = styled.div`
   font-size: 11px;
   font-weight: 400;
   color: #90a0b7;
- transition: width 0.4s ease;
+  transition: width 0.4s ease;
   &.remove {
     display: none;
     transition: width 0.4s ease;
@@ -281,8 +284,8 @@ const Header = styled.div`
   background: #fff;
   z-index: 5;
 `;
-const HeaderForm =styled.form`
-    padding: 21px 68px;
+const HeaderForm = styled.form`
+  padding: 21px 68px;
 `;
 const HeaderInput = styled.input`
   width: 500px;
@@ -297,8 +300,12 @@ const HeaderInput = styled.input`
   }
 `;
 const NotificationContainer = styled.div`
-    padding-right: 15px;
+  padding-right: 15px;
+  display: flex;
+  align-items: center;
+`;
+
+const LoginButton = styled.button`
+  margin-right: 10px;
 `;
 const NotificationImage = styled.img``;
-
-

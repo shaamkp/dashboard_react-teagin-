@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import eclips from "../assets/images/Ellipse 1.svg";
 import eclips2 from "../assets/images/Ellipse 2.svg";
@@ -7,32 +7,44 @@ import message from "../assets/images/Vector.svg";
 import lock from "../assets/images/lock.svg";
 import axios from "axios";
 import { BASE_URL } from "../axiosConfig";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Context } from "./contexts/store";
 // import { useHistory } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [searchParams] = useSearchParams();
+  console.log(searchParams.get('next'));
+  const nextPath = searchParams.get('next')
 
-
-  
-
-  const handleSubmit = (e) =>{
+  const navigate = useNavigate();
+  const { dispatch } = useContext(Context);
+  const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`${BASE_URL}`, { username, password })
-    .then((response)=>{
-      console.log(response.data);
-      let data = response.data;
-      localStorage.setItem("user_data",JSON.stringify(data));
-      
-    })
-    .catch((error) =>{
-      console.log(error.response.data);
-      if(error.response.status == 401){
-        setMessage(error.response.data.data.detail);
-      }
-    })
-  }
+    axios
+      .post(`${BASE_URL}`, { username, password })
+      .then((response) => {
+        console.log(response.data);
+        let data = response.data;
+        dispatch({
+          type: "UPDATE_USER_DATA",
+          userData: {
+            isVerified: true,
+          },
+        });
+        navigate({ pathname: nextPath ? nextPath : "/dashboard"  });
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        if (error.response.status == 401) {
+          setMessage(error.response.data.data.detail);
+        } else {
+          console.log(error);
+        }
+      });
+  };
 
   return (
     <Container>

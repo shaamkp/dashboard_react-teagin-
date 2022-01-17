@@ -1,8 +1,8 @@
 import {React,useState} from "react";
-import { Route, Routes } from "react-router-dom";
-import Contact from "../Contact";
-import Dashboard from "../Dashboard";
-import Sidebar from "../include/Sidebar";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Contact from "../../Contact";
+import Dashboard from "../../Dashboard";
+import Sidebar from "../../include/Sidebar";
 
 function AppRouter() {
   const [active, setActive] = useState(false);
@@ -15,6 +15,7 @@ function AppRouter() {
             path="/"
             element={<Sidebar active={active} setActive={setActive} />}
           >
+            {/* <Route path="/" element={<Navigate to="/dashboard" />} /> */}
             <Route
               path="/dashboard"
               element={<Dashboard active={active} />}

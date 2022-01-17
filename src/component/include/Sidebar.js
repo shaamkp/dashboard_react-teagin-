@@ -25,9 +25,7 @@ export default function Sidebar({ active, setActive }) {
 
   const handleLogout = () => {
     localStorage.clear();
-    setTimeout(() => {
-      navigate("/auth/login");
-    }, 1500);
+    window.location.href="/auth/login"
   };
 
   console.log("IN SIDEBAR");
@@ -110,11 +108,7 @@ export default function Sidebar({ active, setActive }) {
             <HeaderInput type="text" placeholder="Global search" />
           </HeaderForm>
           <NotificationContainer>
-            {userdata ? (
-              <LoginButton onClick={() => handleLogout()}>Logout</LoginButton>
-            ) : (
-              <LoginButton to="/auth/login">Login</LoginButton>
-            )}
+            <LoginButton onClick={() => handleLogout()}>Logout</LoginButton>
             <NotificationImage src={Notification} alt="" />
           </NotificationContainer>
         </Header>
@@ -307,5 +301,12 @@ const NotificationContainer = styled.div`
 
 const LoginButton = styled.button`
   margin-right: 10px;
+  padding: 6px 20px;
+  background: #0575e6;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
 `;
 const NotificationImage = styled.img``;

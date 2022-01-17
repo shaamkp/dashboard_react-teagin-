@@ -52,6 +52,13 @@ const Title = styled.div`
 const Span = styled.span``;
 const Button = styled.button`
   margin-right: 10px;
+  padding: 6px 20px;
+  background: #0575e6;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
 `;
 const Ul = styled.ul`
   display: flex;

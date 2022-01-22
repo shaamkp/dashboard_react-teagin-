@@ -16,8 +16,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [searchParams] = useSearchParams();
-  console.log(searchParams.get('next'));
-  const nextPath = searchParams.get('next')
+  console.log(searchParams.get("next"));
+  const nextPath = searchParams.get("next");
 
   const navigate = useNavigate();
   const { dispatch } = useContext(Context);
@@ -26,15 +26,16 @@ export default function Login() {
     axios
       .post(`${BASE_URL}`, { username, password })
       .then((response) => {
-        console.log(response.data);
-        let data = response.data;
+        let { data } = response.data;
+        console.log(data);
         dispatch({
           type: "UPDATE_USER_DATA",
           userData: {
             isVerified: true,
+            accessToken: data.access,
           },
         });
-        navigate({ pathname: nextPath ? nextPath : "/dashboard"  });
+        navigate({ pathname: nextPath ? nextPath : "/dashboard" });
       })
       .catch((error) => {
         console.log(error.response.data);

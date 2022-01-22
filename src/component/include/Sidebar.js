@@ -10,6 +10,7 @@ import Toggle from "../../assets/images/toggle.svg";
 import Profileimg from "../../assets/images/image.jpg";
 import Notification from "../../assets/images/notifications.svg";
 import Search from "../../assets/images/search.svg";
+import Chat from "../../assets/images/chat.svg"
 import {
   Link,
   Outlet,
@@ -75,6 +76,12 @@ export default function Sidebar({ active, setActive }) {
                   <Image src={Contacts} alt="Image" />
                 </ImageContainer>
                 <ItemName className={active ? "remove" : ""}>Contacts</ItemName>
+              </List>
+              <List to="/chatbox">
+                <ImageContainer className={active ? "imagewidth" : ""}>
+                  <Image src={Chat} alt="Image" />
+                </ImageContainer>
+                <ItemName className={active ? "remove" : ""}>Chats</ItemName>
               </List>
               <List to="/dashboard">
                 <ImageContainer className={active ? "imagewidth" : ""}>

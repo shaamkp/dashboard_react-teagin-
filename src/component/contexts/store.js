@@ -5,6 +5,7 @@ const initialState = {
   userData: {
     isVerified: false,
     roles: ["subscriptions_manager"],
+    accessToken: "",
   },
 };
 

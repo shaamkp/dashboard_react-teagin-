@@ -5,8 +5,9 @@ import { Context } from '../../contexts/store'
 function PrivateRoute({ children }) {
     const location = useLocation()
     const {state} = useContext(Context)
-    console.log(state);
+    console.log(state,"=====================");
     const auth = state.userData.isVerified;
+    console.log(auth);
     return auth ? (
       children
     ) : (

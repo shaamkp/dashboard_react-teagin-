@@ -1,4 +1,4 @@
-import React, { useEffect,useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { Context } from "../../contexts/store";
 import AuthRoute from "../routes/AuthRoute";
@@ -9,24 +9,31 @@ import AuthRouter from "./AuthRouter";
 function MainRouter() {
   console.log("in main router");
   const { dispatch } = useContext(Context);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
+    async function fetchUserData() {
+      let promise = new Promise((resolve, reject) => {
         let userData = localStorage.getItem("userData");
         userData = JSON.parse(userData);
-
-        await dispatch({
+        dispatch({
           type: "UPDATE_USER_DATA",
           userData: userData,
         });
-      } catch (err) {
-        console.log(err);
-      }
-    };
+        setTimeout(() => {
+          resolve("done!");
+          setLoading(false);
+        }, 500);
+      });
+
+      let result = await promise;
+    }
+
     fetchUserData();
   }, []);
-  return (
+  return isLoading ? (
+    "Loading"
+  ) : (
     <Routes>
       <Route
         path="/*"

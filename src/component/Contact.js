@@ -31,15 +31,32 @@ export default function Contact({ active }) {
         <Ul>
           <Li>
             <Form>
-              <Input type="checkbox" id="select" name="select" />
+              <Input
+                className="input"
+                type="checkbox"
+                id="select"
+                name="select"
+              />
+              <Box>
+                <Text>{user.name}</Text>
+              </Box>
             </Form>
+            <Box className="emailField">
+              <Text>{user.email}</Text>
+            </Box>
+            <Box>
+              <Text>{user.company_name}</Text>
+            </Box>
+            <Box>
+              <Text>{user.role}</Text>
+            </Box>
+            <Box>
+              <Text>{user.forecast}</Text>
+            </Box>
+            <Box>
+              <Text>{user.recent_activity_naturaltime}</Text>
+            </Box>
           </Li>
-          <Li>{user.name}</Li>
-          <Li>{user.email}</Li>
-          <Li>{user.company_name}</Li>
-          <Li>{user.role}</Li>
-          <Li>{user.forecast}</Li>
-          <Li>{user.recent_activity_naturaltime}</Li>
         </Ul>
       </>
     ));
@@ -59,9 +76,32 @@ export default function Contact({ active }) {
           <Ul>
             <Li>
               <Form>
-                <Input type="checkbox" id="select" name="select" />
-                <label for="select" className="labelText">select</label>
+                <Input
+                  className="input"
+                  type="checkbox"
+                  id="select"
+                  name="select"
+                />
+                <Box>
+                  <Text>Name</Text>
+                </Box>
               </Form>
+
+              <Box className="emailField">
+                <Text>Email</Text>
+              </Box>
+              <Box>
+                <Text>Company name</Text>
+              </Box>
+              <Box>
+                <Text>Role</Text>
+              </Box>
+              <Box>
+                <Text>Forecast</Text>
+              </Box>
+              <Box>
+                <Text>Recent activity</Text>
+              </Box>
             </Li>
           </Ul>
           {renderItems()}
@@ -100,7 +140,7 @@ const Ul = styled.ul`
   display: flex;
   /* align-items: center; */
   justify-content: space-between;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #ebeff2;
   padding: 10px;
 `;
 const Li = styled.li`
@@ -110,7 +150,11 @@ const Li = styled.li`
   font-size: 11px;
   line-height: 19px;
   letter-spacing: 0.01em;
+  display: flex;
+  justify-content: space-between;
   color: #707683;
+  width: 100%;
+  text-align: left;
   &:first-child {
     margin-left: 10px;
   }
@@ -125,7 +169,30 @@ const Li = styled.li`
     color: #000;
   }
 `;
-const Form = styled.form``;
+const Form = styled.form`
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+`;
 const Input = styled.input`
   cursor: pointer;
 `;
+
+const Name = styled.div``;
+const Email = styled.div``;
+const Company = styled.div``;
+const Role = styled.div``;
+const Forecast = styled.div``;
+const Recent = styled.div``;
+const Box = styled.div`
+  width: 120px;
+  margin-left: 10px;
+  &.emailField{
+    width: 230px;
+  }
+`;
+const First = styled.div`
+  display: flex;
+`;
+const Text = styled.h4``;
+

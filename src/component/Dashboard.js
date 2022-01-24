@@ -3,6 +3,10 @@ import styled from "styled-components";
 import user from "../assets/images/image2.svg";
 import user2 from "../assets/images/image4.svg";
 import user3 from "../assets/images/image5.svg";
+import ring1 from "../assets/images/ring1.svg";
+import ring2 from "../assets/images/ring2.svg";
+import erase from "../assets/images/delete.svg";
+import edit from "../assets/images/edit.svg";
 import Sidebar from '../component/include/Sidebar';
 import ChartArea from "./ChatArea";
 import Doughnuts from "./Doughnuts";
@@ -107,6 +111,18 @@ export default function Dashboard({active}) {
                     <RightTitle>Rebecca Moore</RightTitle>
                   </Right>
                   <Left>
+                    <CircleContainer>
+                      <CircleImg src={ring1} alt="Image" />
+                    </CircleContainer>
+                    <CircleContainer2>
+                      <CircleImg2 src={ring2} alt="Image" />
+                    </CircleContainer2>
+                    <EditContainer>
+                      <EditImg src={edit} alt="Image" />
+                    </EditContainer>
+                    <DeleteContainer>
+                      <DeleteImg src={erase} alt="Image" />
+                    </DeleteContainer>
                     <LeftButton1>Ended</LeftButton1>
                   </Left>
                 </SchedulesBottom>
@@ -313,7 +329,42 @@ const RightTitle = styled.h6`
   color: #707683;
   font-weight: 500;
 `;
-const Left = styled.div``;
+const Left = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const CircleContainer = styled.div`
+  width: 10%;
+  margin-left: 10px;
+`;
+const CircleImg = styled.img`
+  display: block;
+  width: 100%;
+`;
+const CircleContainer2 = styled.div`
+  width: 10%;
+  margin-left: 10px;
+`;
+const CircleImg2 = styled.img`
+  display: block;
+  width: 100%;
+`;
+const EditContainer = styled.div`
+  width: 10%;
+  margin-left: 10px;
+`;
+const EditImg = styled.img`
+  display: block;
+  width: 100%;
+`;
+const DeleteContainer = styled.div`
+  width: 10%;
+  margin-left: 10px;
+`;
+const DeleteImg = styled.img`
+  display: block;
+  width: 100%;
+`;
 const LeftButton = styled.button`
   border: none;
   /* padding: 6px 19px; */

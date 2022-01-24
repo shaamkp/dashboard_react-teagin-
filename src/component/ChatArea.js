@@ -18,11 +18,19 @@ const data = [
   },
   {
     name: "8 Dec",
-    uv: 150,
+    uv: 160,
   },
   {
     name: "16 Dec",
-    uv: 60,
+    uv: 80,
+  },
+  {
+    name: "18 Dec",
+    uv: 120,
+  },
+  {
+    name: "20 Dec",
+    uv: 40,
   },
   {
     name: "31 Dec",

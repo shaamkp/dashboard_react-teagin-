@@ -33,3 +33,26 @@ body {
   padding:70px 20px 0 100px;
   transition: all 0.4s ease;
 }
+.acttive{
+  background: red;
+}
+.Nobackground{
+  margin-left: 245px;
+}
+
+.Nobackground .message{
+  width: 84%;
+  margin-left: 13px;
+  background: #fff;
+  color: #334D6E;
+  border: 1px solid #E4E9EE;
+}
+
+.Nobackground .details{
+  justify-content: flex-end;
+}
+input:focus { 
+  outline: none !important;
+  border-color: #719ECE;
+  box-shadow: 0 0 10px #719ECE;
+}

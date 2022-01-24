@@ -4,8 +4,10 @@ import user from "../assets/images/image2.svg";
 import user2 from "../assets/images/image4.svg";
 import user3 from "../assets/images/image5.svg";
 import Sidebar from '../component/include/Sidebar';
+import ChartArea from "./ChatArea";
+import Doughnuts from "./Doughnuts";
 
-export default function Dashboard({ active}) {
+export default function Dashboard({active}) {
   // const [active, setActive] = useState(false);
   console.log("in dash");
 
@@ -138,7 +140,26 @@ export default function Dashboard({ active}) {
               <ShowMore>Show More</ShowMore>
             </ContainerBottom>
           </Container>
-          <TestDiv></TestDiv>
+          <TaskContainer>
+            <TestDiv>
+              <TestDivTop>
+                <TestDivTopLeft>Deals</TestDivTopLeft>
+                <TestDivTopRight>
+                  Show:<TestDivTopSpan>Monthly</TestDivTopSpan>
+                </TestDivTopRight>
+              </TestDivTop>
+              <ChartArea />
+            </TestDiv>
+            <TestDiv>
+              <TestDivTop>
+                <TestDivTopLeft>Deals</TestDivTopLeft>
+                <TestDivTopRight>
+                  Show:<TestDivTopSpan>Monthly</TestDivTopSpan>
+                </TestDivTopRight>
+              </TestDivTop>
+              <Doughnuts active={active} />
+            </TestDiv>
+          </TaskContainer>
         </MainContainer>
       </Body>
     </div>
@@ -159,9 +180,10 @@ const MainContainer =styled.div`
     justify-content:space-between;
 `;
 const TestDiv = styled.div`
-    width:40%;
-    height:200px;
-    background: red;
+    /* width:40%; */
+    height:450px;
+    background: #fff;
+    margin-top: 15px;
 `;
 const Container = styled.div`
   box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.06);
@@ -169,6 +191,7 @@ const Container = styled.div`
   width: 40%;
   background: #fff;
   border-radius: 4px;
+  margin-top: 20px;
 `;
 const ContainerTop = styled.div`
     margin-top: 20px;
@@ -328,5 +351,26 @@ const Graph = styled.div`
     right: 10%;
     top: 200px;
     width: 20%;
-    
+`;
+const TaskContainer = styled.div`
+  width: 50%;
+  height: 100vh;
+`;
+
+const TestDivTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-bottom: 1px solid #ebeff2;
+`;
+const TestDivTopLeft = styled.div`
+  font-size: 15px;
+`;
+const TestDivTopRight = styled.div`
+  font-size: 12px;
+  line-height: 18px;
+  color: #6a707e;
+`;
+const TestDivTopSpan = styled.span`
+  color: #109cf1;
 `;

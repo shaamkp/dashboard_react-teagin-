@@ -98,7 +98,7 @@ export default function Sidebar({ active, setActive }) {
                   )}
                 </ImageContainer>
                 <ItemName
-                  className={active ? "remove" : "" && activedata === "task"}
+                  className={active ? "remove" : ""}
                 >
                   Tasks
                 </ItemName>

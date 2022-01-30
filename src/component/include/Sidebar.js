@@ -74,7 +74,7 @@ export default function Sidebar({ active, setActive }) {
           <Nav>
             <Ul>
               <List to="/dashboard" onClick={() => setActivedata("dash")}>
-                <ImageContainer className={active ? "imagewidth" : ""}>
+                <ImageContainer>
                   {activedata === "dash" ? (
                     <Image src={DashboardAct} alt="Image" />
                   ) : (
@@ -90,7 +90,7 @@ export default function Sidebar({ active, setActive }) {
                 onClick={() => setActivedata("task")}
                 className={activedata === "task" && "active"}
               >
-                <ImageContainer className={active ? "imagewidth" : ""}>
+                <ImageContainer>
                   {activedata === "task" ? (
                     <Image src={TaskAct} alt="Image" />
                   ) : (
@@ -108,7 +108,7 @@ export default function Sidebar({ active, setActive }) {
                 onClick={() => setActivedata("email")}
                 className={activedata === "email" && "active"}
               >
-                <ImageContainer className={active ? "imagewidth" : ""}>
+                <ImageContainer>
                   {activedata === "email" ? (
                     <Image src={emailAct} alt="Image" />
                   ) : (
@@ -122,7 +122,7 @@ export default function Sidebar({ active, setActive }) {
                 onClick={() => setActivedata("contact")}
                 className={activedata === "contact" && "active"}
               >
-                <ImageContainer className={active ? "imagewidth" : ""}>
+                <ImageContainer>
                   {activedata === "contact" ? (
                     <Image src={contactAct} alt="Image" />
                   ) : (
@@ -136,7 +136,7 @@ export default function Sidebar({ active, setActive }) {
                 onClick={() => setActivedata("chats")}
                 className={activedata === "chats" && "active"}
               >
-                <ImageContainer className={active ? "imagewidth" : ""}>
+                <ImageContainer>
                   {activedata === "chats" ? (
                     <Image src={chatsAct} alt="Image" />
                   ) : (
@@ -150,7 +150,7 @@ export default function Sidebar({ active, setActive }) {
                 onClick={() => setActivedata("deals")}
                 className={activedata === "deals" && "active"}
               >
-                <ImageContainer className={active ? "imagewidth" : ""}>
+                <ImageContainer>
                   {activedata === "deals" ? (
                     <Image src={dealsAct} alt="Image" />
                   ) : (

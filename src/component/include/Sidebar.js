@@ -1,6 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../contexts/store";
 import styled from "styled-components";
+
 import Dashboard from "../../assets/images/qr.svg";
+import DashboardAct from "../../assets/images/dashboard-active.svg";
+import TaskAct from "../../assets/images/tasks-active.svg";
+import emailAct from "../../assets/images/email-active.svg";
+import contactAct from "../../assets/images/contacts-active.svg";
+import chatsAct from "../../assets/images/chat-active.svg";
+import dealsAct from "../../assets/images/deals-active.svg";
 import Tasks from "../../assets/images/tasks.svg";
 import Email from "../../assets/images/email.svg";
 import Contacts from "../../assets/images/user.svg";
@@ -10,7 +18,8 @@ import Toggle from "../../assets/images/toggle.svg";
 import Profileimg from "../../assets/images/image.jpg";
 import Notification from "../../assets/images/notifications.svg";
 import Search from "../../assets/images/search.svg";
-import Chat from "../../assets/images/chat.svg"
+import Chat from "../../assets/images/chat.svg";
+
 import {
   Link,
   Outlet,
@@ -21,19 +30,32 @@ import {
 } from "react-router-dom";
 
 export default function Sidebar({ active, setActive }) {
-  const [userdata, setUserdata] = useState({});
+  const [activedata, setActivedata] = useState(true);
+  const { state, dispatch } = useContext(Context);
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.href="/auth/login"
+    window.location.href = "/auth/login";
+  };
+
+  const activeList = (done) => {
+    dispatch({
+      type: "ACTIVE",
+      active: done,
+    });
+    console.log(state);
   };
 
   console.log("IN SIDEBAR");
   return (
     <>
       <Container>
-        <Aside className={active ? "active" : ""}>
+        <Aside
+          className={active ? "active" : ""}
+          onMouseOver={() => activeList(false)}
+        >
           <TopSection>
             <TopTitle>
               SaaS{" "}
@@ -51,41 +73,89 @@ export default function Sidebar({ active, setActive }) {
           </User>
           <Nav>
             <Ul>
-              <List to="/dashboard">
+              <List to="/dashboard" onClick={() => setActivedata("dash")}>
                 <ImageContainer className={active ? "imagewidth" : ""}>
-                  <Image src={Dashboard} alt="Image" />
+                  {activedata === "dash" ? (
+                    <Image src={DashboardAct} alt="Image" />
+                  ) : (
+                    <Image src={Dashboard} alt="Image" />
+                  )}
                 </ImageContainer>
                 <ItemName className={active ? "remove" : ""}>
                   Dashboard
                 </ItemName>
               </List>
-              <List to="/dashboard">
+              <List
+                to="/dashboard"
+                onClick={() => setActivedata("task")}
+                className={activedata === "task" && "active"}
+              >
                 <ImageContainer className={active ? "imagewidth" : ""}>
-                  <Image src={Tasks} alt="Image" />
+                  {activedata === "task" ? (
+                    <Image src={TaskAct} alt="Image" />
+                  ) : (
+                    <Image src={Tasks} alt="Image" />
+                  )}
                 </ImageContainer>
-                <ItemName className={active ? "remove" : ""}>Tasks</ItemName>
+                <ItemName
+                  className={active ? "remove" : "" && activedata === "task"}
+                >
+                  Tasks
+                </ItemName>
               </List>
-              <List to="/dashboard">
+              <List
+                to="/dashboard"
+                onClick={() => setActivedata("email")}
+                className={activedata === "email" && "active"}
+              >
                 <ImageContainer className={active ? "imagewidth" : ""}>
-                  <Image src={Email} alt="Image" />
+                  {activedata === "email" ? (
+                    <Image src={emailAct} alt="Image" />
+                  ) : (
+                    <Image src={Email} alt="Image" />
+                  )}
                 </ImageContainer>
                 <ItemName className={active ? "remove" : ""}>Email</ItemName>
               </List>
-              <List to="/contact">
+              <List
+                to="/contact"
+                onClick={() => setActivedata("contact")}
+                className={activedata === "contact" && "active"}
+              >
                 <ImageContainer className={active ? "imagewidth" : ""}>
-                  <Image src={Contacts} alt="Image" />
+                  {activedata === "contact" ? (
+                    <Image src={contactAct} alt="Image" />
+                  ) : (
+                    <Image src={Contacts} alt="Image" />
+                  )}
                 </ImageContainer>
                 <ItemName className={active ? "remove" : ""}>Contacts</ItemName>
               </List>
-              <List to="/chatbox">
+              <List
+                to="/chatbox"
+                onClick={() => setActivedata("chats")}
+                className={activedata === "chats" && "active"}
+              >
                 <ImageContainer className={active ? "imagewidth" : ""}>
-                  <Image src={Chat} alt="Image" />
+                  {activedata === "chats" ? (
+                    <Image src={chatsAct} alt="Image" />
+                  ) : (
+                    <Image src={Chat} alt="Image" />
+                  )}
                 </ImageContainer>
                 <ItemName className={active ? "remove" : ""}>Chats</ItemName>
               </List>
-              <List to="/dashboard">
+              <List
+                to="/dashboard"
+                onClick={() => setActivedata("deals")}
+                className={activedata === "deals" && "active"}
+              >
                 <ImageContainer className={active ? "imagewidth" : ""}>
-                  <Image src={Deals} alt="Image" />
+                  {activedata === "deals" ? (
+                    <Image src={dealsAct} alt="Image" />
+                  ) : (
+                    <Image src={Deals} alt="Image" />
+                  )}
                 </ImageContainer>
                 <ItemName className={active ? "remove" : ""}>Deals</ItemName>
               </List>
@@ -209,11 +279,19 @@ const List = styled(NavLink)`
   margin-top: 20px;
   cursor: pointer;
   text-decoration: none;
+  &.active {
+    height: 110px;
+    overflow: hidden;
+    transition: 0.4s ease;
+  }
 `;
 const ImageContainer = styled.div`
   width: 20px;
   height: 20px;
   &.imagewidth {
+  }
+  &.active {
+    color: black;
   }
 `;
 const Image = styled.img`
@@ -225,9 +303,13 @@ const ItemName = styled.div`
   font-size: 13px;
   font-weight: 600;
   transition: width 0.4s ease;
+  color: #109cf1;
   &.remove {
     display: none;
     transition: width 0.4s ease;
+  }
+  &.active {
+    color: #109cf1;
   }
 `;
 const BottomNav = styled.div`

@@ -7,6 +7,7 @@ import Sidebar from "../../include/Sidebar";
 
 function AppRouter() {
   const [active, setActive] = useState(false);
+  
   console.log("in app router");
   return (
     <div>

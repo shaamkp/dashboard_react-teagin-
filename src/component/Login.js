@@ -9,7 +9,6 @@ import axios from "axios";
 import { BASE_URL } from "../axiosConfig";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Context } from "./contexts/store";
-// import { useHistory } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState("");

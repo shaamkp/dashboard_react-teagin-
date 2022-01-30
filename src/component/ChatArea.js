@@ -62,7 +62,7 @@ const ChartArea = () => {
             dataKey="uv"
             stroke="#109CF1"
             fill="#109CF1"
-            fillOpacity={0.3}
+            fillOpacity={0.1}
           />
         </AreaChart>
       </ResponsiveContainer>
